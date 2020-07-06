@@ -27,6 +27,7 @@ const useClickOutsideEffect = (params) => {
 
 const useAction = (fn, args) => react.useCallback(() => fn(args), [fn, args]);
 function usePopup(initial = false) {
+    console.warn('This hook is deprecated! Use useToggle() instead.');
     const [isShown, setIsShown] = react.useState(initial);
     return {
         hide: useAction(setIsShown, false),
@@ -36,5 +37,17 @@ function usePopup(initial = false) {
     };
 }
 
+const useAction$1 = (fn, args) => react.useCallback(() => fn(args), [fn, args]);
+function useToggle(initial = false) {
+    const [isOn, setIsOn] = react.useState(initial);
+    return {
+        isOn: isOn,
+        toggle: useAction$1(setIsOn, !isOn),
+        toggleOff: useAction$1(setIsOn, false),
+        toggleOn: useAction$1(setIsOn, true),
+    };
+}
+
 exports.useClickOutsideEffect = useClickOutsideEffect;
 exports.usePopup = usePopup;
+exports.useToggle = useToggle;

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ottofeller/hooks#readme",
   "dependencies": {
+    "axios": "0.20.0",
     "react-useportal": "1.0.13",
     "typescript": "3.8.0-dev.20200208"
   },

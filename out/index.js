@@ -306,6 +306,74 @@ function useToggle(initial = false) {
     };
 }
 
+const useLocalStorage = (key, initialValue) => {
+    const [storedValue, setStoredValue] = react.useState(() => {
+        try {
+            const item = window.localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+        }
+        catch (error) {
+            return initialValue;
+        }
+    });
+    const setValue = (value) => {
+        try {
+            const valueToStore = value instanceof Function ? value(storedValue) : value;
+            setStoredValue(valueToStore);
+            window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        }
+        catch (error) { }
+    };
+    return [storedValue, setValue];
+};
+
+const axios = require('axios');
+const useUpload = (params) => {
+    const [isUploading, setStateIsUploading] = react.useState(false);
+    const [isUploadError, setIsUploadError] = react.useState(false);
+    const upload = react.useCallback(async (file) => {
+        const CancelToken = axios.CancelToken;
+        const source = CancelToken.source();
+        const config = {
+            cancelToken: source.token,
+            onUploadProgress: progressEvent => {
+                if (typeof params.setUploadProgress === 'function') {
+                    params.setUploadProgress(Math.round(progressEvent.loaded * 100 / progressEvent.total));
+                }
+            },
+        };
+        const data = new FormData();
+        data.append(params.fileFieldName || 'file', file[0]);
+        if (typeof params.onStart === 'function') {
+            params.onStart(source);
+        }
+        try {
+            setIsUploadError(null);
+            setStateIsUploading(true);
+            const response = await axios.put(params.urlOrPath, data, config);
+            if (typeof params.onSuccess === 'function') {
+                params.onSuccess(response);
+            }
+            return response;
+        }
+        catch (error) {
+            setIsUploadError(error);
+            if (typeof params.onError === 'function') {
+                params.onError(error);
+            }
+        }
+        finally {
+            setStateIsUploading(false);
+            if (typeof params.onFinish === 'function') {
+                params.onFinish();
+            }
+        }
+    }, []);
+    return { isUploading, isUploadError, upload };
+};
+
 exports.useClickOutsideEffect = useClickOutsideEffect;
+exports.useLocalStorage = useLocalStorage;
 exports.usePopup = usePopup;
 exports.useToggle = useToggle;
+exports.useUpload = useUpload;

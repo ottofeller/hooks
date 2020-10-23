@@ -368,8 +368,8 @@ const useUpload = (params) => {
                 params.onFinish();
             }
         }
-    }, []);
-    return { isUploading, isUploadError, upload };
+    }, [params]);
+    return { isUploadError, isUploading, upload };
 };
 
 exports.useClickOutsideEffect = useClickOutsideEffect;

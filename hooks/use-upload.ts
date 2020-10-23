@@ -1,5 +1,5 @@
-import {AxiosResponse} from 'axios'
 import {useCallback, useState} from 'react'
+import {AxiosResponse} from 'axios'
 const axios = require('axios')
 
 export const useUpload = (params: {
@@ -62,7 +62,7 @@ export const useUpload = (params: {
         params.onFinish()
       }
     }
-  }, [])
+  }, [params])
 
-  return {isUploading, isUploadError, upload}
+  return {isUploadError, isUploading, upload}
 }

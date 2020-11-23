@@ -1,13 +1,12 @@
+import axios, {AxiosResponse, CancelTokenSource} from 'axios'
 import {useCallback, useState} from 'react'
-import {AxiosResponse} from 'axios'
-const axios = require('axios')
 
 export const useUpload = (params: {
   fileFieldName?: string
   onError?: (error) => void
   onFinish?: () => void
-  onSuccess?: (response: AxiosResponse<{location: string}>) => void
-  onStart?: (CancelTokenSource) => void
+  onSuccess?: (params: {response: AxiosResponse<{location: string}>}) => void
+  onStart?: (params: {source: CancelTokenSource}) => void
   setUploadProgress?: (progress: number) => void
   urlOrPath: string
 }): {
@@ -33,10 +32,10 @@ export const useUpload = (params: {
     }
 
     const data = new FormData()
-    data.append(params.fileFieldName || 'file', file[0])
+    data.append(params.fileFieldName || 'file', file)
 
     if(typeof params.onStart === 'function') {
-      params.onStart(source)
+      params.onStart({source})
     }
 
     try {
@@ -45,7 +44,7 @@ export const useUpload = (params: {
       const response = await axios.put(params.urlOrPath, data, config)
 
       if(typeof params.onSuccess === 'function') {
-        params.onSuccess(response)
+        params.onSuccess({response})
       }
 
       return response

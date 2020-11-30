@@ -4,7 +4,7 @@ import {RefObject, useCallback, useEffect} from 'react'
 export const useClickOutsideEffect = (params: {
   callback: () => any
   nodeRef: RefObject<HTMLDivElement>
-  toggleNodeRef: RefObject<HTMLDivElement>
+  toggleNodeRef: RefObject<HTMLElement>
 }) => {
   const handleClickOutsideDatesPopup = useCallback(event => {
     if(

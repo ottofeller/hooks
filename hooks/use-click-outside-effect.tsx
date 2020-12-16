@@ -3,7 +3,7 @@ import {RefObject, useCallback, useEffect} from 'react'
 // Run a callback if a click happens outside of the desired area
 export const useClickOutsideEffect = (params: {
   callback: () => any
-  nodeRef: RefObject<HTMLDivElement>
+  nodeRef: RefObject<HTMLElement>
   toggleNodeRef: RefObject<HTMLElement>
 }) => {
   const handleClickOutsideDatesPopup = useCallback(event => {

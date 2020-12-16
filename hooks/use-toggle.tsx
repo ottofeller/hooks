@@ -1,6 +1,9 @@
-import {useCallback, useState} from 'react'
+import {Dispatch, SetStateAction, useCallback, useState} from 'react'
 
-const useAction = (fn, args) => useCallback(() => fn(args), [fn, args])
+const useAction = (
+  fn: Dispatch<SetStateAction<boolean>>,
+  args: SetStateAction<boolean>,
+) => useCallback(() => fn(args), [fn, args])
 
 export function useToggle(initial = false) {
   const [isOn, setIsOn] = useState(initial)

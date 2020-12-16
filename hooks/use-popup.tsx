@@ -1,6 +1,9 @@
-import {createElement, ReactElement, useCallback, useState} from 'react'
+import {createElement, Dispatch, ReactElement, SetStateAction, useCallback, useState} from 'react'
 import usePortal from 'react-useportal'
-const useAction = (fn, args) => useCallback(() => fn(args), [fn, args])
+const useAction = (
+  fn: Dispatch<SetStateAction<boolean>>,
+  args: SetStateAction<boolean>,
+) => useCallback(() => fn(args), [fn, args])
 
 export function usePopup(initial = false) {
   const [isShown, setIsShown] = useState(initial)

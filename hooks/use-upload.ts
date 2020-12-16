@@ -3,7 +3,7 @@ import {useCallback, useState} from 'react'
 
 export const useUpload = (params: {
   fileFieldName?: string
-  onError?: (error) => void
+  onError?: (error: Error) => void
   onFinish?: () => void
   onSuccess?: (params: {response: AxiosResponse<{location: string}>}) => void
   onStart?: (params: {source: CancelTokenSource}) => void
@@ -24,9 +24,9 @@ export const useUpload = (params: {
     const config = {
       cancelToken: source.token,
 
-      onUploadProgress: progressEvent => {
+      onUploadProgress: ({loaded, total}: {loaded: number, total: number}) => {
         if(typeof params.setUploadProgress === 'function') {
-          params.setUploadProgress(Math.round(progressEvent.loaded * 100 / progressEvent.total))
+          params.setUploadProgress(Math.round(loaded * 100 / total))
         }
       },
     }

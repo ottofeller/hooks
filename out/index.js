@@ -2,22 +2,31 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+var react_1 = require('react');
+var react_dom_1 = require('react-dom');
+var http = require('http');
+var https = require('https');
+var url = require('url');
+var require$$0$1 = require('stream');
+var assert = require('assert');
+var require$$0 = require('debug');
+var zlib = require('zlib');
 
-var react = require('react');
-var react__default = _interopDefault(react);
-var reactDom = _interopDefault(require('react-dom'));
-var http = _interopDefault(require('http'));
-var https = _interopDefault(require('https'));
-var url = _interopDefault(require('url'));
-var stream = _interopDefault(require('stream'));
-var assert = _interopDefault(require('assert'));
-var debug$1 = _interopDefault(require('debug'));
-var zlib = _interopDefault(require('zlib'));
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var react_1__default = /*#__PURE__*/_interopDefaultLegacy(react_1);
+var react_dom_1__default = /*#__PURE__*/_interopDefaultLegacy(react_dom_1);
+var http__default = /*#__PURE__*/_interopDefaultLegacy(http);
+var https__default = /*#__PURE__*/_interopDefaultLegacy(https);
+var url__default = /*#__PURE__*/_interopDefaultLegacy(url);
+var require$$0__default$1 = /*#__PURE__*/_interopDefaultLegacy(require$$0$1);
+var assert__default = /*#__PURE__*/_interopDefaultLegacy(assert);
+var require$$0__default = /*#__PURE__*/_interopDefaultLegacy(require$$0);
+var zlib__default = /*#__PURE__*/_interopDefaultLegacy(zlib);
 
 // Run a callback if a click happens outside of the desired area
 const useClickOutsideEffect = (params) => {
-    const handleClickOutsideDatesPopup = react.useCallback(event => {
+    const handleClickOutsideDatesPopup = react_1.useCallback(event => {
         if (params.toggleNodeRef.current &&
             params.nodeRef.current &&
             !params.toggleNodeRef.current.contains(event.target) &&
@@ -25,7 +34,7 @@ const useClickOutsideEffect = (params) => {
             params.callback();
         }
     }, [params]);
-    react.useEffect(() => {
+    react_1.useEffect(() => {
         if (typeof document === 'undefined') {
             return;
         }
@@ -38,16 +47,13 @@ const useClickOutsideEffect = (params) => {
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
-function unwrapExports (x) {
+function getDefaultExportFromCjs (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
 }
 
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
-}
-
-function getCjsExportFromNamespace (n) {
-	return n && n['default'] || n;
+function createCommonjsModule(fn) {
+  var module = { exports: {} };
+	return fn(module, module.exports), module.exports;
 }
 
 var useSSR = createCommonjsModule(function (module, exports) {
@@ -103,11 +109,6 @@ exports.useSSR = function () { return useSSRObject; };
 exports.default = exports.useSSR;
 });
 
-unwrapExports(useSSR);
-var useSSR_1 = useSSR.Device;
-var useSSR_2 = useSSR.weAreServer;
-var useSSR_3 = useSSR.useSSR;
-
 var usePortal_1 = createCommonjsModule(function (module, exports) {
 var __assign = (commonjsGlobal && commonjsGlobal.__assign) || function () {
     __assign = Object.assign || function(t) {
@@ -145,24 +146,24 @@ function usePortal(_a) {
     _d = _a.isOpen, // attach the portal to this node in the DOM
     defaultIsOpen = _d === void 0 ? false : _d, onOpen = _a.onOpen, onClose = _a.onClose, onPortalClick = _a.onPortalClick, eventHandlers = __rest(_a, ["closeOnOutsideClick", "closeOnEsc", "bindTo", "isOpen", "onOpen", "onClose", "onPortalClick"]);
     var _e = use_ssr_1.default(), isServer = _e.isServer, isBrowser = _e.isBrowser;
-    var _f = react__default.useState(defaultIsOpen), isOpen = _f[0], makeOpen = _f[1];
+    var _f = react_1__default['default'].useState(defaultIsOpen), isOpen = _f[0], makeOpen = _f[1];
     // we use this ref because `isOpen` is stale for handleOutsideMouseClick
-    var open = react__default.useRef(isOpen);
-    var setOpen = react__default.useCallback(function (v) {
+    var open = react_1__default['default'].useRef(isOpen);
+    var setOpen = react_1__default['default'].useCallback(function (v) {
         // workaround to not have stale `isOpen` in the handleOutsideMouseClick
         open.current = v;
         makeOpen(v);
     }, []);
-    var targetEl = react__default.useRef(); // this is the element you are clicking/hovering/whatever, to trigger opening the portal
-    var portal = react__default.useRef(isBrowser ? document.createElement('div') : null);
-    react__default.useEffect(function () {
+    var targetEl = react_1__default['default'].useRef(); // this is the element you are clicking/hovering/whatever, to trigger opening the portal
+    var portal = react_1__default['default'].useRef(isBrowser ? document.createElement('div') : null);
+    react_1__default['default'].useEffect(function () {
         if (isBrowser && !portal.current)
             portal.current = document.createElement('div');
     }, [isBrowser, portal]);
-    var elToMountTo = react__default.useMemo(function () {
+    var elToMountTo = react_1__default['default'].useMemo(function () {
         if (isServer)
             return;
-        return (bindTo && reactDom.findDOMNode(bindTo)) || document.body;
+        return (bindTo && react_dom_1__default['default'].findDOMNode(bindTo)) || document.body;
     }, [isServer, bindTo]);
     var createCustomEvent = function (e) {
         if (!e)
@@ -190,7 +191,7 @@ function usePortal(_a) {
         };
         return acc;
     }, {});
-    var openPortal = react__default.useCallback(function (e) {
+    var openPortal = react_1__default['default'].useCallback(function (e) {
         if (isServer)
             return;
         var customEvent = createCustomEvent(e);
@@ -205,7 +206,7 @@ function usePortal(_a) {
             onOpen(customEvent);
         setOpen(true);
     }, [isServer, portal, setOpen, targetEl, onOpen]);
-    var closePortal = react__default.useCallback(function (e) {
+    var closePortal = react_1__default['default'].useCallback(function (e) {
         if (isServer)
             return;
         var customEvent = createCustomEvent(e);
@@ -214,20 +215,20 @@ function usePortal(_a) {
         if (open.current)
             setOpen(false);
     }, [isServer, onClose, setOpen]);
-    var togglePortal = react__default.useCallback(function (e) {
+    var togglePortal = react_1__default['default'].useCallback(function (e) {
         return open.current ? closePortal(e) : openPortal(e);
     }, [closePortal, openPortal]);
-    var handleKeydown = react__default.useCallback(function (e) {
+    var handleKeydown = react_1__default['default'].useCallback(function (e) {
         return (e.key === 'Escape' && closeOnEsc) ? closePortal(e) : undefined;
     }, [closeOnEsc, closePortal]);
-    var handleOutsideMouseClick = react__default.useCallback(function (e) {
+    var handleOutsideMouseClick = react_1__default['default'].useCallback(function (e) {
         var containsTarget = function (target) { return target.current.contains(e.target); };
         if (containsTarget(portal) || e.button !== 0 || !open.current || containsTarget(targetEl))
             return;
         if (closeOnOutsideClick)
             closePortal(e);
     }, [isServer, closePortal, closeOnOutsideClick, portal]);
-    var handleMouseDown = react__default.useCallback(function (e) {
+    var handleMouseDown = react_1__default['default'].useCallback(function (e) {
         if (isServer || !(portal.current instanceof HTMLElement))
             return;
         var customEvent = createCustomEvent(e);
@@ -236,8 +237,8 @@ function usePortal(_a) {
         handleOutsideMouseClick(e);
     }, [handleOutsideMouseClick]);
     // used to remove the event listeners on unmount
-    var eventListeners = react__default.useRef({});
-    react__default.useEffect(function () {
+    var eventListeners = react_1__default['default'].useRef({});
+    react_1__default['default'].useEffect(function () {
         if (isServer)
             return;
         if (!(elToMountTo instanceof HTMLElement) || !(portal.current instanceof HTMLElement))
@@ -275,10 +276,10 @@ function usePortal(_a) {
             elToMountTo.removeChild(node);
         };
     }, [isServer, handleOutsideMouseClick, handleKeydown, elToMountTo, portal]);
-    var Portal = react__default.useCallback(function (_a) {
+    var Portal = react_1__default['default'].useCallback(function (_a) {
         var children = _a.children;
         if (portal.current != null)
-            return reactDom.createPortal(children, portal.current);
+            return react_dom_1__default['default'].createPortal(children, portal.current);
         return null;
     }, [portal]);
     return Object.assign([openPortal, closePortal, open.current, Portal, togglePortal, targetEl, portal], __assign(__assign({ isOpen: open.current, openPortal: openPortal, ref: targetEl, closePortal: closePortal,
@@ -289,14 +290,13 @@ exports.default = usePortal;
 
 });
 
-var usePortal = unwrapExports(usePortal_1);
-var usePortal_2 = usePortal_1.errorMessage1;
+var usePortal = /*@__PURE__*/getDefaultExportFromCjs(usePortal_1);
 
-const useAction = (fn, args) => react.useCallback(() => fn(args), [fn, args]);
+const useAction = (fn, args) => react_1.useCallback(() => fn(args), [fn, args]);
 function usePopup(initial = false) {
-    const [isShown, setIsShown] = react.useState(initial);
+    const [isShown, setIsShown] = react_1.useState(initial);
     const { Portal } = usePortal();
-    const Popup = react.useCallback((props) => isShown ? react.createElement(Portal, null, props.children) : null, [Portal, isShown]);
+    const Popup = react_1.useCallback((props) => isShown ? react_1.createElement(Portal, null, props.children) : null, [Portal, isShown]);
     return {
         hide: useAction(setIsShown, false),
         isShown,
@@ -306,9 +306,9 @@ function usePopup(initial = false) {
     };
 }
 
-const useAction$1 = (fn, args) => react.useCallback(() => fn(args), [fn, args]);
+const useAction$1 = (fn, args) => react_1.useCallback(() => fn(args), [fn, args]);
 function useToggle(initial = false) {
-    const [isOn, setIsOn] = react.useState(initial);
+    const [isOn, setIsOn] = react_1.useState(initial);
     return {
         isOn: isOn,
         toggle: useAction$1(setIsOn, !isOn),
@@ -318,7 +318,7 @@ function useToggle(initial = false) {
 }
 
 const useLocalStorage = (key, initialValue) => {
-    const [storedValue, setStoredValue] = react.useState(() => {
+    const [storedValue, setStoredValue] = react_1.useState(() => {
         try {
             const item = window.localStorage.getItem(key);
             return item ? JSON.parse(item) : initialValue;
@@ -1136,19 +1136,12 @@ var xhr = function xhrAdapter(config) {
       delete requestHeaders['Content-Type']; // Let the browser set it
     }
 
-    if (
-      (utils.isBlob(requestData) || utils.isFile(requestData)) &&
-      requestData.type
-    ) {
-      delete requestHeaders['Content-Type']; // Let the browser set it
-    }
-
     var request = new XMLHttpRequest();
 
     // HTTP basic authentication
     if (config.auth) {
       var username = config.auth.username || '';
-      var password = unescape(encodeURIComponent(config.auth.password)) || '';
+      var password = config.auth.password ? unescape(encodeURIComponent(config.auth.password)) : '';
       requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
     }
 
@@ -1306,17 +1299,17 @@ var xhr = function xhrAdapter(config) {
 var debug;
 try {
   /* eslint global-require: off */
-  debug = debug$1("follow-redirects");
+  debug = require$$0__default['default']("follow-redirects");
 }
 catch (error) {
   debug = function () { /* */ };
 }
 var debug_1 = debug;
 
-var URL = url.URL;
+var URL = url__default['default'].URL;
 
 
-var Writable = stream.Writable;
+var Writable = require$$0__default$1['default'].Writable;
 
 
 
@@ -1553,7 +1546,7 @@ RedirectableRequest.prototype._performRequest = function () {
   // Create the native request
   var request = this._currentRequest =
         nativeProtocol.request(this._options, this._onNativeResponse);
-  this._currentUrl = url.format(this._options);
+  this._currentUrl = url__default['default'].format(this._options);
 
   // Set up event handlers
   request._redirectable = this;
@@ -1650,13 +1643,13 @@ RedirectableRequest.prototype._processResponse = function (response) {
 
     // Drop the Host header, as the redirect might lead to a different host
     var previousHostName = removeMatchingHeaders(/^host$/i, this._options.headers) ||
-      url.parse(this._currentUrl).hostname;
+      url__default['default'].parse(this._currentUrl).hostname;
 
     // Create the redirected request
-    var redirectUrl = url.resolve(this._currentUrl, location);
+    var redirectUrl = url__default['default'].resolve(this._currentUrl, location);
     debug_1("redirecting to", redirectUrl);
     this._isRedirect = true;
-    var redirectUrlParts = url.parse(redirectUrl);
+    var redirectUrlParts = url__default['default'].parse(redirectUrl);
     Object.assign(this._options, redirectUrlParts);
 
     // Drop the Authorization header if redirecting to another host
@@ -1714,7 +1707,7 @@ function wrap(protocols) {
     var wrappedProtocol = exports[scheme] = Object.create(nativeProtocol);
 
     // Executes a request, following redirects
-    wrappedProtocol.request = function (input, options, callback) {
+    function request(input, options, callback) {
       // Parse parameters
       if (typeof input === "string") {
         var urlStr = input;
@@ -1723,7 +1716,7 @@ function wrap(protocols) {
         }
         catch (err) {
           /* istanbul ignore next */
-          input = url.parse(urlStr);
+          input = url__default['default'].parse(urlStr);
         }
       }
       else if (URL && (input instanceof URL)) {
@@ -1746,17 +1739,23 @@ function wrap(protocols) {
       }, input, options);
       options.nativeProtocols = nativeProtocols;
 
-      assert.equal(options.protocol, protocol, "protocol mismatch");
+      assert__default['default'].equal(options.protocol, protocol, "protocol mismatch");
       debug_1("options", options);
       return new RedirectableRequest(options, callback);
-    };
+    }
 
     // Executes a GET request, following redirects
-    wrappedProtocol.get = function (input, options, callback) {
-      var request = wrappedProtocol.request(input, options, callback);
-      request.end();
-      return request;
-    };
+    function get(input, options, callback) {
+      var wrappedRequest = wrappedProtocol.request(input, options, callback);
+      wrappedRequest.end();
+      return wrappedRequest;
+    }
+
+    // Expose the properties on the wrapped protocol
+    Object.defineProperties(wrappedProtocol, {
+      request: { value: request, configurable: true, enumerable: true, writable: true },
+      get: { value: get, configurable: true, enumerable: true, writable: true },
+    });
   });
   return exports;
 }
@@ -1808,39 +1807,34 @@ function createErrorType(code, defaultMessage) {
 }
 
 // Exports
-var followRedirects = wrap({ http: http, https: https });
+var followRedirects = wrap({ http: http__default['default'], https: https__default['default'] });
 var wrap_1 = wrap;
 followRedirects.wrap = wrap_1;
 
-var _args = [
-	[
-		"axios@0.20.0",
-		"/Users/nide/Code/hooks"
-	]
-];
-var _from = "axios@0.20.0";
-var _id = "axios@0.20.0";
+var _from = "axios@0.21.0";
+var _id = "axios@0.21.0";
 var _inBundle = false;
-var _integrity = "sha512-ANA4rr2BDcmmAQLOKft2fufrtuvlqR+cXNNinUmvfeSNCOF98PZL+7M/v1zIdGo7OLjEA9J2gXJL+j4zGsl0bA==";
+var _integrity = "sha512-fmkJBknJKoZwem3/IKSSLpkdNXZeBu5Q7GA/aRsr2btgrptmSCxi2oFjZHqGdK9DoTil9PIHlPIZw2EcRJXRvw==";
 var _location = "/axios";
 var _phantomChildren = {
 };
 var _requested = {
 	type: "version",
 	registry: true,
-	raw: "axios@0.20.0",
+	raw: "axios@0.21.0",
 	name: "axios",
 	escapedName: "axios",
-	rawSpec: "0.20.0",
+	rawSpec: "0.21.0",
 	saveSpec: null,
-	fetchSpec: "0.20.0"
+	fetchSpec: "0.21.0"
 };
 var _requiredBy = [
 	"/"
 ];
-var _resolved = "https://registry.npmjs.org/axios/-/axios-0.20.0.tgz";
-var _spec = "0.20.0";
-var _where = "/Users/nide/Code/hooks";
+var _resolved = "https://registry.npmjs.org/axios/-/axios-0.21.0.tgz";
+var _shasum = "26df088803a2350dff2c27f96fef99fe49442aca";
+var _spec = "axios@0.21.0";
+var _where = "C:\\Users\\DELL\\Documents\\GitHub\\hooks";
 var author = {
 	name: "Matt Zabriskie"
 };
@@ -1850,6 +1844,7 @@ var browser = {
 var bugs = {
 	url: "https://github.com/axios/axios/issues"
 };
+var bundleDependencies = false;
 var bundlesize = [
 	{
 		path: "./dist/axios.min.js",
@@ -1859,6 +1854,7 @@ var bundlesize = [
 var dependencies = {
 	"follow-redirects": "^1.10.0"
 };
+var deprecated = false;
 var description = "Promise based HTTP client for the browser and node.js";
 var devDependencies = {
 	bundlesize: "^0.17.0",
@@ -1926,9 +1922,8 @@ var scripts = {
 };
 var typings = "./index.d.ts";
 var unpkg = "dist/axios.min.js";
-var version = "0.20.0";
-var _package = {
-	_args: _args,
+var version = "0.21.0";
+var pkg = {
 	_from: _from,
 	_id: _id,
 	_inBundle: _inBundle,
@@ -1938,13 +1933,16 @@ var _package = {
 	_requested: _requested,
 	_requiredBy: _requiredBy,
 	_resolved: _resolved,
+	_shasum: _shasum,
 	_spec: _spec,
 	_where: _where,
 	author: author,
 	browser: browser,
 	bugs: bugs,
+	bundleDependencies: bundleDependencies,
 	bundlesize: bundlesize,
 	dependencies: dependencies,
+	deprecated: deprecated,
 	description: description,
 	devDependencies: devDependencies,
 	homepage: homepage,
@@ -1959,43 +1957,6 @@ var _package = {
 	unpkg: unpkg,
 	version: version
 };
-
-var _package$1 = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  _args: _args,
-  _from: _from,
-  _id: _id,
-  _inBundle: _inBundle,
-  _integrity: _integrity,
-  _location: _location,
-  _phantomChildren: _phantomChildren,
-  _requested: _requested,
-  _requiredBy: _requiredBy,
-  _resolved: _resolved,
-  _spec: _spec,
-  _where: _where,
-  author: author,
-  browser: browser,
-  bugs: bugs,
-  bundlesize: bundlesize,
-  dependencies: dependencies,
-  description: description,
-  devDependencies: devDependencies,
-  homepage: homepage,
-  jsdelivr: jsdelivr,
-  keywords: keywords,
-  license: license,
-  main: main,
-  name: name,
-  repository: repository,
-  scripts: scripts,
-  typings: typings,
-  unpkg: unpkg,
-  version: version,
-  'default': _package
-});
-
-var pkg = getCjsExportFromNamespace(_package$1);
 
 var httpFollow = followRedirects.http;
 var httpsFollow = followRedirects.https;
@@ -2052,7 +2013,7 @@ var http_1 = function httpAdapter(config) {
 
     // Parse url
     var fullPath = buildFullPath(config.baseURL, config.url);
-    var parsed = url.parse(fullPath);
+    var parsed = url__default['default'].parse(fullPath);
     var protocol = parsed.protocol || 'http:';
 
     if (!auth && parsed.auth) {
@@ -2090,7 +2051,7 @@ var http_1 = function httpAdapter(config) {
       var proxyEnv = protocol.slice(0, -1) + '_proxy';
       var proxyUrl = process.env[proxyEnv] || process.env[proxyEnv.toUpperCase()];
       if (proxyUrl) {
-        var parsedProxyUrl = url.parse(proxyUrl);
+        var parsedProxyUrl = url__default['default'].parse(proxyUrl);
         var noProxyEnv = process.env.no_proxy || process.env.NO_PROXY;
         var shouldProxy = true;
 
@@ -2152,7 +2113,7 @@ var http_1 = function httpAdapter(config) {
     if (config.transport) {
       transport = config.transport;
     } else if (config.maxRedirects === 0) {
-      transport = isHttpsProxy ? https : http;
+      transport = isHttpsProxy ? https__default['default'] : http__default['default'];
     } else {
       if (config.maxRedirects) {
         options.maxRedirects = config.maxRedirects;
@@ -2183,7 +2144,7 @@ var http_1 = function httpAdapter(config) {
         case 'compress':
         case 'deflate':
         // add the unzipper to the body stream processing pipeline
-          stream = stream.pipe(zlib.createUnzip());
+          stream = stream.pipe(zlib__default['default'].createUnzip());
 
           // remove the content-encoding in order to not confuse downstream operations
           delete res.headers['content-encoding'];
@@ -2595,7 +2556,8 @@ utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData
   Axios.prototype[method] = function(url, config) {
     return this.request(mergeConfig(config || {}, {
       method: method,
-      url: url
+      url: url,
+      data: (config || {}).data
     }));
   };
 });
@@ -2755,22 +2717,22 @@ axios.spread = spread;
 var axios_1 = axios;
 
 // Allow use of default import syntax in TypeScript
-var default_1 = axios;
-axios_1.default = default_1;
+var _default = axios;
+axios_1.default = _default;
 
 var axios$1 = axios_1;
 
 const useUpload = (params) => {
-    const [isUploading, setStateIsUploading] = react.useState(false);
-    const [isUploadError, setIsUploadError] = react.useState(false);
-    const upload = react.useCallback(async (file) => {
+    const [isUploading, setStateIsUploading] = react_1.useState(false);
+    const [isUploadError, setIsUploadError] = react_1.useState(false);
+    const upload = react_1.useCallback(async (file) => {
         const CancelToken = axios$1.CancelToken;
         const source = CancelToken.source();
         const config = {
             cancelToken: source.token,
-            onUploadProgress: progressEvent => {
+            onUploadProgress: ({ loaded, total }) => {
                 if (typeof params.setUploadProgress === 'function') {
-                    params.setUploadProgress(Math.round(progressEvent.loaded * 100 / progressEvent.total));
+                    params.setUploadProgress(Math.round(loaded * 100 / total));
                 }
             },
         };

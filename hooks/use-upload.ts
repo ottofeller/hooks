@@ -5,8 +5,8 @@ export const useUpload = (params: {
   fileFieldName?: string
   onError?: (error: Error) => void
   onFinish?: () => void
-  onSuccess?: (params: {response: AxiosResponse<{location: string}>}) => void
-  onStart?: (params: {source: CancelTokenSource}) => void
+  onSuccess?: (localParams: {response: AxiosResponse<{location: string}>}) => void
+  onStart?: (localParams: {source: CancelTokenSource}) => void
   setUploadProgress?: (progress: number) => void
   urlOrPath: string
 }): {

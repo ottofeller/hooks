@@ -1,6 +1,11 @@
 import {RefObject, useCallback, useEffect} from 'react'
 
-// Run a callback if a click happens outside of the desired area
+/**
+ * Runs a callback if a click happens outside of the desired area
+ *
+ * @param nodeRef - a ref to the node clicking outside which is considered as an outside click
+ * @param toggleNodeRef - a ref to the node which toggles visibility of the node (above). Clicking toggleNode will not trigger a callback call.
+ */
 export const useClickOutsideEffect = (params: {
   callback: () => any
   nodeRef: RefObject<HTMLElement>

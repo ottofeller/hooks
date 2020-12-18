@@ -6,6 +6,12 @@ const useAction = (
   args: SetStateAction<boolean>,
 ) => useCallback(() => fn(args), [fn, args])
 
+/**
+ * Returns a component that renders its children in Portal.
+ *
+ * @remarks
+ * Also returns methods for managing the visibility of the popup, as well as for getting its status.
+ */
 export function usePopup(initial = false) {
   const [isShown, setIsShown] = useState(initial)
   const {Portal} = usePortal()

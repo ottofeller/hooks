@@ -1,5 +1,11 @@
 import {useState} from 'react'
 
+/**
+ * Interacts (get/set) with a single value from localStorage.
+ *
+ * @returns
+ * A single value and a method for setting the value in localStorage.
+ */
 export const useLocalStorage = <S>(key: string, initialValue?: S): [S, React.Dispatch<React.SetStateAction<S>>] => {
   const [storedValue, setStoredValue] = useState<S>(() => {
     try {

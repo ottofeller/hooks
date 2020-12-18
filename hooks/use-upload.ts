@@ -1,6 +1,15 @@
 import axios, {AxiosResponse, CancelTokenSource} from 'axios'
 import {useCallback, useState} from 'react'
 
+/**
+ * Uploads a file to specified URL or URL.
+ *
+ * @remarks
+ * With status flags, callbacks and cancellation capability.
+ *
+ * @returns
+ * Status flags and a function calling which will start an upload.
+ */
 export const useUpload = (params: {
   fileFieldName?: string
   onError?: (error: Error) => void

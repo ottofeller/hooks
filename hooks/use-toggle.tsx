@@ -5,6 +5,12 @@ const useAction = (
   args: SetStateAction<boolean>,
 ) => useCallback(() => fn(args), [fn, args])
 
+/**
+ * A simple hook for toggling boolean state.
+ *
+ * @returns
+ * A state in `isOn` and methods for updating it.
+ */
 export function useToggle(initial = false) {
   const [isOn, setIsOn] = useState(initial)
 
